@@ -1,0 +1,220 @@
+---
+---
+
+<section class="hero" id="inicio">
+  <div class="hero__content">
+    <p class="hero__greeting">Hola, soy</p>
+    <h1 class="hero__name">José Secadura</h1>
+    <h2 class="hero__title">
+      <span class="hero__title-prefix">_</span>Desarrollador Web
+    </h2>
+    <p class="hero__description">
+      Apasionado por crear experiencias digitales elegantes y funcionales.
+      Construyo productos web modernos, accesibles y con atención al detalle.
+    </p>
+    <div class="hero__actions">
+      <a href="#proyectos" class="btn btn--primary">Ver proyectos</a>
+      <a href="#contacto" class="btn btn--secondary">Contactar</a>
+    </div>
+    <div class="hero__scroll-indicator" aria-hidden="true">
+      <span></span>
+    </div>
+  </div>
+  <div class="hero__decoration" aria-hidden="true">
+    <div class="code-card">
+      <div class="code-card__dots">
+        <span></span><span></span><span></span>
+      </div>
+      <pre class="code-card__code"><code><span class="kw">const</span> <span class="var">developer</span> = <span class="brace">{"{"}</span>
+  <span class="key">name</span>: <span class="str">'José Secadura'</span>,
+  <span class="key">role</span>: <span class="str">'Web Developer'</span>,
+  <span class="key">skills</span>: [<span class="str">'HTML'</span>, <span class="str">'CSS'</span>, <span class="str">'JS'</span>],
+  <span class="key">passion</span>: <span class="str">'Building the web'</span>,
+<span class="brace">{"}"}</span>;</code></pre>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 8rem 2rem 4rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .hero__content {
+    flex: 1;
+    max-width: 560px;
+  }
+
+  .hero__greeting {
+    font-family: var(--font-mono);
+    color: var(--color-accent);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero__name {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .hero__title {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero__title-prefix {
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+  }
+
+  .hero__description {
+    color: var(--color-text-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    max-width: 480px;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all var(--transition);
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  .btn--primary {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .btn--primary:hover {
+    background: var(--color-accent-light);
+    transform: translateY(-2px);
+  }
+
+  .btn--secondary {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    background: transparent;
+  }
+
+  .btn--secondary:hover {
+    background: rgba(124, 106, 247, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .hero__scroll-indicator {
+    margin-top: 3rem;
+    display: flex;
+  }
+
+  .hero__scroll-indicator span {
+    display: block;
+    width: 1.5px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--color-accent), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { opacity: 1; transform: scaleY(1); }
+    50% { opacity: 0.4; transform: scaleY(0.6); }
+  }
+
+  /* Code card decoration */
+  .hero__decoration {
+    flex: 1;
+    max-width: 420px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .code-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    width: 100%;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  }
+
+  .code-card__dots {
+    display: flex;
+    gap: 6px;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .code-card__dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+
+  .code-card__dots span:nth-child(1) { background: #ff5f57; }
+  .code-card__dots span:nth-child(2) { background: #febc2e; }
+  .code-card__dots span:nth-child(3) { background: #28c840; }
+
+  .code-card__code {
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  .kw  { color: #c792ea; }
+  .var { color: #82aaff; }
+  .key { color: #f07178; }
+  .str { color: #c3e88d; }
+  .brace { color: var(--color-text); }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      gap: 3rem;
+      padding-top: 7rem;
+    }
+
+    .hero__actions {
+      justify-content: center;
+    }
+
+    .hero__scroll-indicator {
+      justify-content: center;
+    }
+
+    .hero__description {
+      margin: 0 auto 2rem;
+    }
+
+    .hero__decoration {
+      max-width: 340px;
+    }
+  }
+</style>

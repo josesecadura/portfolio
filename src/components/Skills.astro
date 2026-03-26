@@ -1,0 +1,136 @@
+---
+const skills = [
+  {
+    category: "Frontend",
+    icon: "🎨",
+    items: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Vue.js", "Astro"],
+  },
+  {
+    category: "Backend",
+    icon: "⚙️",
+    items: ["Node.js", "Express", "REST APIs", "GraphQL", "PostgreSQL", "MongoDB"],
+  },
+  {
+    category: "Herramientas",
+    icon: "🛠️",
+    items: ["Git", "GitHub", "Docker", "VS Code", "Figma", "Linux"],
+  },
+  {
+    category: "Soft Skills",
+    icon: "💡",
+    items: ["Trabajo en equipo", "Comunicación", "Resolución de problemas", "Aprendizaje continuo"],
+  },
+];
+---
+
+<section class="skills" id="habilidades">
+  <div class="skills__inner">
+    <div class="section-header">
+      <span class="section-tag">03. Habilidades</span>
+      <h2 class="section-title">Mi stack tecnológico</h2>
+    </div>
+    <div class="skills__grid">
+      {skills.map((group) => (
+        <div class="skill-group">
+          <div class="skill-group__header">
+            <span class="skill-group__icon" aria-hidden="true">{group.icon}</span>
+            <h3 class="skill-group__title">{group.category}</h3>
+          </div>
+          <ul class="skill-group__list">
+            {group.items.map((skill) => (
+              <li class="skill-tag">{skill}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills {
+    padding: 5rem 2rem;
+    background: var(--color-surface);
+  }
+
+  .skills__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 3rem;
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-accent);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-group {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+
+  .skill-group:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-4px);
+  }
+
+  .skill-group__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-group__icon {
+    font-size: 1.5rem;
+  }
+
+  .skill-group__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .skill-group__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    transition: color var(--transition), border-color var(--transition);
+  }
+
+  .skill-group:hover .skill-tag {
+    color: var(--color-accent-light);
+    border-color: rgba(124, 106, 247, 0.3);
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__credit">
+      Diseñado y desarrollado por
+      <span class="footer__name">José Secadura</span>
+      con
+      <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="footer__link">Astro</a>
+    </p>
+    <p class="footer__copy">© {new Date().getFullYear()} — Todos los derechos reservados</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 2rem;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .footer__inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .footer__credit {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .footer__name {
+    color: var(--color-accent-light);
+    font-weight: 500;
+  }
+
+  .footer__link {
+    color: var(--color-accent);
+    transition: color var(--transition);
+  }
+
+  .footer__link:hover {
+    color: var(--color-accent-light);
+  }
+
+  .footer__copy {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    opacity: 0.6;
+  }
+
+  @media (max-width: 640px) {
+    .footer__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>
