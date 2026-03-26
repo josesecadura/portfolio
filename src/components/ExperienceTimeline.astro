@@ -1,0 +1,27 @@
+---
+const { title, items } = Astro.props as {
+	title: string;
+	items: Array<{ year: string; role: string; copy?: string }>;
+	className?: string;
+};
+
+const { className = '' } = Astro.props;
+---
+
+<section class:list={["timeline-block", "section-block", className]}>
+	<h2>{title}</h2>
+	<div class="timeline">
+		{
+			items.map((item) => (
+				<article class="timeline-item">
+					<span class="timeline-dot" aria-hidden="true"></span>
+					<div class="timeline-content">
+						<p class="timeline-year">{item.year}</p>
+						<h3>{item.role}</h3>
+						{item.copy && <p>{item.copy}</p>}
+					</div>
+				</article>
+			))
+		}
+	</div>
+</section>

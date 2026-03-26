@@ -1,0 +1,21 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<Layout title="Portfolio | Projects" lang={lang}>
+	<section class="page-head">
+		<h1>{t('projects.page.title')}</h1>
+		<p>{t('projects.copy')}</p>
+	</section>
+
+	<div class="project-grid">
+		<ProjectCard title={t('projects.card1.title')} copy={t('projects.card1.copy')} />
+		<ProjectCard title={t('projects.card2.title')} copy={t('projects.card2.copy')} />
+		<ProjectCard title={t('projects.card3.title')} copy={t('projects.card3.copy')} />
+	</div>
+</Layout>

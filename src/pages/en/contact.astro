@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<Layout title="Portfolio | Contact" lang={lang}>
+	<section class="page-head">
+		<h1>{t('contact.page.title')}</h1>
+		<p>{t('contact.page.copy')}</p>
+	</section>
+
+	<section class="section-block form-wrap">
+		<label for="name">{t('contact.form.name')}</label>
+		<input id="name" type="text" placeholder={t('contact.form.name')} />
+		<label for="message">{t('contact.form.message')}</label>
+		<textarea id="message" rows="5" placeholder={t('contact.form.message')}></textarea>
+		<button class="btn-primary" type="button">{t('contact.form.send')}</button>
+	</section>
+</Layout>

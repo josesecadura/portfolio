@@ -1,0 +1,8 @@
+---
+const { title, copy, className = '' } = Astro.props;
+---
+
+<section class:list={["section-block", className]}>
+	<h2>{title}</h2>
+	<p class="whitespace-pre-line">{copy}</p>
+</section>

@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import SectionBlock from '../../components/SectionBlock.astro';
+import ExperienceTimeline from '../../components/ExperienceTimeline.astro';
+import TechStack from '../../components/TechStack.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'en';
+const t = useTranslations(lang);
+---
+
+<Layout title="Portfolio | Home" lang={lang}>
+	<section class="hero">
+		<p class="kicker">{t('hero.kicker')}</p>
+		<h1>{t('hero.title')}</h1>
+		<p>{t('hero.copy')}</p>
+
+		<div class="mt-8">
+			<TechStack lang={lang} isCarousel={true} />
+		</div>
+	</section>
+
+	<div id="about" class="anchor-section">
+		<SectionBlock title={t('about.title')} copy={t('about.copy')} />
+	</div>
+
+	<div class="grid-2 anchor-section home-duo">
+		<ExperienceTimeline
+			className="compact-card"
+			title={t('experience.title')}
+			items={[
+				{ year: t('experience.item1.year'), role: t('experience.item1.role'), copy: t('experience.item1.copy') },
+				{ year: t('experience.item2.year'), role: t('experience.item2.role'), copy: t('experience.item2.copy') }
+			]}
+		/>
+
+		<ExperienceTimeline
+			className="compact-card"
+			title={t('education.title')}
+			items={[
+				{ year: t('education.item1.school'), role: t('education.item1.degree') },
+				{ year: t('education.item2.school'), role: t('education.item2.degree') }
+			]}
+		/>
+	</div>
+
+	<div id="projects" class="anchor-section">
+		<section class="section-block">
+			<h2>{t('projects.title')}</h2>
+			<p>{t('projects.copy')}</p>
+			<div class="mt-4 flex items-center gap-3">
+				<a
+					href={t('social.github')}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="GitHub"
+					class="hover:text-yellow-400 hover:scale-110 transition-all"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6" aria-hidden="true">
+						<path d="M12 .5C5.648.5.5 5.648.5 12a11.5 11.5 0 0 0 7.86 10.92c.575.106.785-.25.785-.556 0-.274-.01-1-.016-1.963-3.197.695-3.872-1.54-3.872-1.54-.523-1.328-1.277-1.682-1.277-1.682-1.044-.713.079-.698.079-.698 1.154.081 1.761 1.185 1.761 1.185 1.026 1.757 2.692 1.25 3.348.956.104-.743.402-1.25.732-1.538-2.552-.291-5.238-1.276-5.238-5.68 0-1.255.449-2.282 1.184-3.087-.119-.291-.513-1.463.112-3.049 0 0 .966-.309 3.167 1.179a10.97 10.97 0 0 1 2.884-.388c.979.004 1.966.132 2.886.388 2.2-1.488 3.165-1.179 3.165-1.179.627 1.586.233 2.758.114 3.049.737.805 1.182 1.832 1.182 3.087 0 4.415-2.69 5.386-5.251 5.672.413.355.781 1.056.781 2.129 0 1.537-.014 2.777-.014 3.154 0 .309.207.668.79.554A11.502 11.502 0 0 0 23.5 12C23.5 5.648 18.352.5 12 .5Z"/>
+					</svg>
+				</a>
+				<p>{t('projects.github.more')}</p>
+			</div>
+		</section>
+	</div>
+
+	<div id="contact" class="anchor-section">
+		<section class="section-block">
+			<h2>{t('contact.title')}</h2>
+			<p>{t('contact.copy')}</p>
+			<div class="mt-4 flex items-center gap-3">
+				<a
+					href={t('social.linkedin')}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label="LinkedIn"
+					class="hover:text-yellow-400 hover:scale-110 transition-all"
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6" aria-hidden="true">
+						<path d="M20.447 20.452h-3.554v-5.569c0-1.329-.028-3.039-1.852-3.039-1.854 0-2.137 1.447-2.137 2.941v5.667H9.35V9h3.413v1.561h.049c.476-.9 1.637-1.849 3.37-1.849 3.601 0 4.267 2.37 4.267 5.455v6.285ZM5.337 7.433a2.063 2.063 0 1 1 0-4.126 2.063 2.063 0 0 1 0 4.126ZM7.114 20.452H3.558V9h3.556v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/>
+					</svg>
+				</a>
+				<p>{t('contact.linkedin.cta')}</p>
+			</div>
+		</section>
+	</div>
+</Layout>

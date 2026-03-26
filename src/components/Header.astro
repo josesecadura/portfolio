@@ -1,0 +1,61 @@
+---
+import { withLangPath, switchLanguagePath, type Language, type TranslationKey } from '../i18n/ui';
+
+const { currentPath = '/', lang = 'es', t } = Astro.props as {
+    currentPath?: string;
+    lang?: Language;
+    t: (key: TranslationKey) => string;
+};
+
+const links = [
+    { href: withLangPath(lang, '/'), label: t('nav.home') },
+    { href: `${withLangPath(lang, '/')}#about`, label: t('nav.about') },
+    { href: `${withLangPath(lang, '/')}#projects`, label: t('nav.projects') },
+    { href: `${withLangPath(lang, '/')}#contact`, label: t('nav.contact') }
+];
+
+const languageHref = switchLanguagePath(lang, currentPath);
+---
+
+<header class="site-header">
+    <div class="brand">
+        <img class="avatar" src="/foto_jose.jpeg" alt="Jose profile photo" />
+        <div>
+            <p class="brand-name">Jose</p>
+            <p class="brand-role">{t('header.role')}</p>
+        </div>
+    </div>
+
+    <nav class="main-nav" aria-label="Primary">
+        {
+            links.map((link) => (
+                <a
+                    href={link.href}
+                    class:list={{
+                        navlink: true,
+                        active: link.href === withLangPath(lang, '/') && currentPath === withLangPath(lang, '/')
+                    }}
+                >
+                    {link.label}
+                </a>
+            ))
+        }
+    </nav>
+
+    <div class="toolbar">
+        <a href={languageHref} class="tool-btn">{t('header.lang')}</a>
+        <button id="theme-toggle" class="tool-btn" type="button">{t('header.theme')}</button>
+    </div>
+</header>
+
+<script>
+    const themeButton = document.getElementById('theme-toggle');
+
+    themeButton?.addEventListener('click', () => {
+        const root = document.documentElement;
+        const nextTheme = root.classList.contains('dark') ? 'light' : 'dark';
+        root.classList.toggle('dark', nextTheme === 'dark');
+        root.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('theme', nextTheme);
+    });
+</script>

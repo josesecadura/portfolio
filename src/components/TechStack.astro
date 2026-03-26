@@ -1,0 +1,129 @@
+---
+interface Props {
+  lang: 'es' | 'en';
+  isCarousel?: boolean;
+}
+
+const { lang, isCarousel = false } = Astro.props;
+
+import { useTranslations } from '../i18n/ui';
+const t = useTranslations(lang);
+
+// Datos de tecnologías con niveles - tipado con as const
+const technologies = [
+  { name: 'tech.name.java' as const, level: 'tech.level.high' as const, icon: 'java' },
+  { name: 'tech.name.cpp' as const, level: 'tech.level.high' as const, icon: 'cpp' },
+  { name: 'tech.name.python' as const, level: 'tech.level.medium' as const, icon: 'python' },
+  { name: 'tech.name.haskell' as const, level: 'tech.level.medium' as const, icon: 'haskell' },
+  { name: 'tech.name.angular' as const, level: 'tech.level.medium' as const, icon: 'angular' },
+  { name: 'tech.name.sql' as const, level: 'tech.level.medium' as const, icon: 'sql' },
+] as const;
+
+// Mapeo de colores por nivel
+const levelColors: Record<'tech.level.high' | 'tech.level.medium', string> = {
+  'tech.level.high': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+  'tech.level.medium': 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+} as const;
+
+// Iconos como strings HTML para usar con set:html
+const icons: Record<string, string> = {
+  java: '<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M52.58 11.25c-3.004 4.202-1.734 10.18 2.738 13.305 4.472 3.126 10.903 1.855 13.906-2.347 3.003-4.202 1.735-10.179-2.737-13.305-4.472-3.126-10.904-1.855-13.907 2.347z"/><path fill="currentColor" d="M38.77 26.1c-2.29 3.2-1.32 7.74 2.09 10.14 3.41 2.4 8.33 1.43 10.62-1.77 2.29-3.2 1.32-7.74-2.09-10.14-3.41-2.4-8.33-1.43-10.62 1.77zM92.48 56.79c-8.34 0-15.13 6.79-15.13 15.13S84.14 87.05 92.48 87.05s15.13-6.79 15.13-15.13-6.79-15.13-15.13-15.13zm0 24.28c-5.05 0-9.15-4.1-9.15-9.15s4.1-9.15 9.15-9.15 9.15 4.1 9.15 9.15-4.1 9.15-9.15 9.15z"/><path fill="currentColor" d="M26 64C12.75 64 2 74.75 2 88s10.75 24 24 24h72c13.25 0 24-10.75 24-24s-10.75-24-24-24H26z"/></svg>',
+  cpp: '<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M50 20H8v88h42V20zm-8 76H16V28h26v68z"/><path fill="currentColor" d="M76 20h-8v88h8V20zm26 0h-8v88h8V20z"/><path fill="currentColor" d="M120 44h-12v-8h-8v8h-8v8h8v12h8v-12h12v-8z"/></svg>',
+  python: '<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><linearGradient id="pya" x1="77.193%" y1="62.766%" x2="5.576%" y2="0%"><stop offset="0%" stop-color="#387EB8"/><stop offset="100%" stop-color="#366994"/></linearGradient><linearGradient id="pyb" x1="19.127%" y1="20.579%" x2="90.697%" y2="93.696%"><stop offset="0%" stop-color="#FFE052"/><stop offset="100%" stop-color="#FFC331"/></linearGradient><path fill="url(#pya)" d="M63.391 1.679c-4.16.02-8.252.501-12.052 1.482-13.341 3.199-15.762 9.966-15.762 22.479v17.465h31.393V74.22H27.198c-12.502 0-23.488 7.532-26.899 21.886C-1.465 110.775.007 125.585 12.33 125.585h10.824v-18.38c0-13.964 7.631-21.886 21.886-21.886h31.393V24.16c0-13.512-10.966-20.899-24.435-22.48z"/><path fill="url(#pyb)" d="M96.306 26.457c-4.16-7.128-12.239-12.348-21.886-12.348H42.906v18.38c0 13.964-7.631 21.886-21.886 21.886H10.627v16.953h31.393c12.502 0 23.488 7.532 26.899 21.886 3.41 14.353 1.938 29.163-10.385 32.572h21.892c13.514 0 20.9-10.966 22.481-24.435 3.199-13.342-1.482-27.153-16.721-36.464z"/></svg>',
+  haskell: '<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M128 74L73 101v-27L128 47v27zm0-29L73 72V45L128 18v27zm-64-18L0 45v27L64 45V18zM0 74l64 27v-27L0 47v27z"/></svg>',
+  angular: '<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M64 10L10 29l9 72.2 45 16.8 45-16.8 9-72.2L64 10zm38 95.2H26.5L23 67h82l-3.5 38.2zM64 32.4c10 0 18 8 18 18s-8 18-18 18-18-8-18-18 8-18 18-18z"/></svg>',
+  sql: '<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M64 10c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm-18.1 30.6c-3.6 2-6 5.8-6 10.4v8h-12v8h12v12h-12v8h12v12h8V67c0-1.1.9-2 2-2h8c1.1 0 2 .9 2 2v20c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2v-4h-8v4c0 4.4 3.6 8 8 8h8c4.4 0 8-3.6 8-8V65h12v-8H56v-8c0-3.3-2.7-6-6-6h-12z"/></svg>',
+};
+
+const getIcon = (iconName: string): string => {
+  return icons[iconName] || icons.java;
+};
+---
+
+{isCarousel ? (
+  <section class="py-12 px-4">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold mb-8 text-center text-gray-800 dark:text-gray-100">
+        {t('tech.title')}
+      </h2>
+      
+      <div class="tech-carousel-container overflow-hidden rounded-lg">
+        <div class="tech-carousel flex gap-4 animate-scroll">
+          {[...technologies, ...technologies].map((tech) => (
+            <div
+              class="tech-carousel-item flex-shrink-0 w-32 h-32 flex flex-col items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 rounded-lg p-4 hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+            >
+              <div class="w-12 h-12 text-blue-600 dark:text-blue-400" set:html={getIcon(tech.icon)} />
+              <span class="text-sm font-semibold text-gray-700 dark:text-gray-200 text-center">
+                {t(tech.name)}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  <section class="section-block">
+    <div class="mb-8">
+      <h2>{t('tech.title')}</h2>
+      <p class="text-gray-600 dark:text-gray-400 mt-2">{t('tech.copy')}</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {technologies.map((tech) => (
+        <div class="tech-card group border-2 border-gray-200 dark:border-gray-700 rounded-lg p-6 transition-all duration-300 hover:scale-105 hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/50 dark:hover:border-yellow-400 dark:hover:shadow-yellow-400/30 cursor-pointer">
+          <div class="mb-4 flex justify-center">
+            <div
+              class="w-12 h-12 text-blue-600 dark:text-blue-400 group-hover:text-yellow-400 transition-colors duration-300"
+              set:html={getIcon(tech.icon)}
+            />
+          </div>
+
+          <h3 class="text-lg font-semibold text-center mb-3 text-gray-800 dark:text-gray-100">
+            {t(tech.name)}
+          </h3>
+
+          <div class="flex justify-center">
+            <span class={`inline-block px-3 py-1 rounded-full text-sm font-medium ${levelColors[tech.level]}`}>
+              {t(tech.level)}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  .tech-carousel-container:hover .animate-scroll {
+    animation-play-state: paused;
+  }
+
+  .tech-card {
+    background-color: var(--card-bg, #ffffff);
+  }
+
+  .tech-carousel-item:hover {
+    transform: translateY(-4px);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .tech-card {
+      background-color: #111827;
+    }
+  }
+</style>
