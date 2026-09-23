@@ -37,3 +37,7 @@ npm create astro@latest -- --template minimal
 ## 📄 Secciones
 
 
+## 📄 Estado
+
+🚧 Portfolio actualmente en desarrollo.
+
